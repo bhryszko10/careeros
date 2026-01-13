@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { LandingPage } from './components/LandingPage'
 import { JobTracker } from './components/JobTracker'
+import { ResumeMatch } from './components/ResumeMatch'
 
 export type Job = {
   id: string
@@ -17,7 +18,7 @@ export type Job = {
   contacts?: string
 }
 
-export type AppView = 'landing' | 'tracker'
+export type AppView = 'landing' | 'tracker' | 'resume-match'
 
 function App() {
   const [view, setView] = useState<AppView>('landing')
@@ -59,6 +60,10 @@ function App() {
     return <LandingPage onGetStarted={() => setView('tracker')} />
   }
 
+  if (view === 'resume-match') {
+    return <ResumeMatch onBack={() => setView('tracker')} />
+  }
+
   return (
     <JobTracker 
       jobs={jobs}
@@ -67,6 +72,7 @@ function App() {
       onDeleteJob={deleteJob}
       onMoveJob={moveJob}
       onBackToLanding={() => setView('landing')}
+      onGoToResumeMatch={() => setView('resume-match')}
     />
   )
 }

@@ -32,7 +32,8 @@ import {
   DollarSign,
   ArrowLeft,
   GripVertical,
-  BarChart3
+  BarChart3,
+  Sparkles
 } from 'lucide-react'
 
 interface JobTrackerProps {
@@ -42,6 +43,7 @@ interface JobTrackerProps {
   onDeleteJob: (id: string) => void
   onMoveJob: (id: string, status: Job['status']) => void
   onBackToLanding: () => void
+  onGoToResumeMatch: () => void
 }
 
 const COLUMNS: { id: Job['status']; title: string; color: string }[] = [
@@ -59,7 +61,8 @@ export function JobTracker({
   onUpdateJob, 
   onDeleteJob, 
   onMoveJob,
-  onBackToLanding 
+  onBackToLanding,
+  onGoToResumeMatch
 }: JobTrackerProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
@@ -156,8 +159,8 @@ export function JobTracker({
               </div>
             </div>
 
-            {/* Stats & Add */}
-            <div className="flex items-center gap-4">
+            {/* Stats & Actions */}
+            <div className="flex items-center gap-3">
               <div className="hidden sm:flex items-center gap-6 text-sm">
                 <div className="flex items-center gap-2">
                   <BarChart3 className="w-4 h-4 text-muted-foreground" />
@@ -168,6 +171,17 @@ export function JobTracker({
                   Response: <span className="font-semibold text-foreground">{stats.responseRate}%</span>
                 </div>
               </div>
+
+              {/* Resume Match Button */}
+              <Button 
+                variant="outline" 
+                onClick={onGoToResumeMatch}
+                className="border-emerald-500/30 hover:bg-emerald-500/10 hover:border-emerald-500/50"
+              >
+                <Sparkles className="w-4 h-4 mr-2 text-emerald-400" />
+                <span className="hidden sm:inline">Resume Match</span>
+                <span className="sm:hidden">Match</span>
+              </Button>
               
               <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
                 <DialogTrigger asChild>

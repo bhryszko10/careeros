@@ -11,7 +11,8 @@ import {
   BarChart3,
   Bell,
   Zap,
-  ChevronRight
+  ChevronRight,
+  FileSearch
 } from 'lucide-react'
 
 interface LandingPageProps {
@@ -120,7 +121,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Feature 1 */}
             <div className="group p-6 rounded-2xl bg-gradient-to-b from-card to-card/50 border border-border/50 hover:border-emerald-500/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -141,7 +142,29 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               </ul>
             </div>
 
-            {/* Feature 2 */}
+            {/* Feature 2 - Resume Match (NEW) */}
+            <div className="group p-6 rounded-2xl bg-gradient-to-b from-card to-card/50 border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 relative overflow-hidden">
+              <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+                NEW
+              </div>
+              <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <FileSearch className="w-6 h-6 text-purple-400" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">AI Resume Match</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Instantly see how well your resume matches any job description. Get actionable feedback.
+              </p>
+              <ul className="mt-4 space-y-2">
+                {['Match score %', 'Missing skills', 'Improvement tips'].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="w-4 h-4 text-purple-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Feature 3 */}
             <div className="group p-6 rounded-2xl bg-gradient-to-b from-card to-card/50 border border-border/50 hover:border-emerald-500/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Bell className="w-6 h-6 text-amber-400" />
@@ -160,7 +183,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               </ul>
             </div>
 
-            {/* Feature 3 */}
+            {/* Feature 4 */}
             <div className="group p-6 rounded-2xl bg-gradient-to-b from-card to-card/50 border border-border/50 hover:border-emerald-500/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <BarChart3 className="w-6 h-6 text-sky-400" />
