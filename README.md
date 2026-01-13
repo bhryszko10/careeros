@@ -10,11 +10,7 @@ The command center for modern job seekers. Track applications, nail negotiations
 
 ### Setup
 
-1. Open terminal in this folder:
-```bash
-cd C:\Users\brett\OneDrive\Documents\Claude_Access\CareerOS_Project
-```
-
+1. Clone the repository
 2. Install dependencies:
 ```bash
 npm install
@@ -39,6 +35,7 @@ Output will be in the `dist/` folder.
 
 - **Visual Pipeline**: Kanban-style board with drag & drop
 - **Job Tracking**: Company, position, salary, contacts, notes
+- **AI Resume Match**: See how well your resume fits job descriptions
 - **Search & Filter**: Find jobs instantly
 - **Analytics**: Response rate tracking
 - **Local Storage**: Data persists in your browser
@@ -53,13 +50,12 @@ Output will be in the `dist/` folder.
 
 ## Roadmap
 
-- [ ] Supabase backend (cloud sync)
-- [ ] User authentication
-- [ ] Stripe payments
+- [ ] Cloud sync with user accounts
+- [ ] Stripe payments for Pro tier
 - [ ] CareerOS Negotiate (salary tools)
 - [ ] CareerOS Navigator (career mapping)
 - [ ] Chrome extension
 
----
+## License
 
-Built with Claude AI
+MIT
