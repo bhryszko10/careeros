@@ -22,13 +22,31 @@ interface LandingPageProps {
 export function LandingPage({ onGetStarted }: LandingPageProps) {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleWaitlist = (e: React.FormEvent) => {
+  const handleWaitlist = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (email) {
-      // In production, this would send to a backend
-      localStorage.setItem('careeros-waitlist-email', email)
-      setSubscribed(true)
+    if (!email || isSubmitting) return
+    
+    setIsSubmitting(true)
+    
+    try {
+      // Submit to Formspree - replace YOUR_FORM_ID with actual ID
+      const response = await fetch('https://formspree.io/f/mvzzobva', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+      
+      if (response.ok) {
+        setSubscribed(true)
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -93,12 +111,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <span className="text-sm text-muted-foreground">No signup required</span>
           </div>
 
-          {/* Stats */}
+          {/* Stats - Updated to honest, feature-based metrics */}
           <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
             {[
-              { value: '50+', label: 'Applications tracked' },
-              { value: '6.2x', label: 'More interviews' },
-              { value: '23%', label: 'Higher offers' },
+              { value: '6', label: 'Pipeline stages' },
+              { value: '100%', label: 'Free to use' },
+              { value: '0', label: 'Signups required' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-3xl font-bold text-foreground">{stat.value}</div>
@@ -295,9 +313,10 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               />
               <Button 
                 type="submit"
-                className="h-12 px-6 bg-emerald-500 hover:bg-emerald-600 text-background font-medium"
+                disabled={isSubmitting}
+                className="h-12 px-6 bg-emerald-500 hover:bg-emerald-600 text-background font-medium disabled:opacity-50"
               >
-                Join Waitlist
+                {isSubmitting ? 'Joining...' : 'Join Waitlist'}
               </Button>
             </form>
           )}
